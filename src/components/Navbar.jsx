@@ -2,6 +2,7 @@
 import '../App.css';
 import { UseAuthContext } from '../Context/AuthContext';
 import React from 'react';
+import NavLog from './NavLog';
 
 
 const Navbar = () => {
@@ -16,6 +17,7 @@ const Navbar = () => {
                 />
                 <h3 className="gall-name">CamGallary</h3>
             </div>
+            <NavLog />
         </div>
     )
 }

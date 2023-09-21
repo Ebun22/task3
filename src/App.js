@@ -11,15 +11,13 @@ import { useStateContext } from './Context/context';
 function App() {
 
   const { isLogin } = UseAuthContext();
-  const { hasAccount } = useStateContext()
+  const { hasAccount, showAuth, setShowAuth } = useStateContext()
   return (
     <div className="App">
-   
         <>
           <Navbar />
-          <Gallery />
+         <Gallery />
         </>
-
     </div>
   );
 }

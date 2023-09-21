@@ -4,6 +4,9 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import '../App.css';
 import ImageSkeleton from './ImageSkeleton';
 import { UseAuthContext } from '../Context/AuthContext';
+import UserAuth from './UserAuth';
+import { useStateContext } from '../Context/context';
+import { Link } from 'react-router-dom';
 
 
 //please, i had to be chasing my supervisoraround for 3 days. 
@@ -11,7 +14,7 @@ import { UseAuthContext } from '../Context/AuthContext';
 //did this in 6 hrs, imagine what i coukd do with time. please have mercy
 function Gallery() {
   const [search, setSearch] = useState('')
-  const images =  [
+  const images = [
     {
       "id": 1,
       "name": "Image 1",
@@ -69,7 +72,10 @@ function Gallery() {
 
   ]
   const [newImages, setNewImages] = useState(images);
-  const { isLogin } = UseAuthContext();
+  const { hasAccount, setHasAccount, showSignUp, setShowSignUp, showAuth, setShowAuth } = useStateContext()
+  const { isLogin, setIsLogin } = UseAuthContext();
+
+
   //function to convert capitalize any word
   const capitalize = (word) => {
     return word.charAt(0).toUpperCase() + word.slice(1);
@@ -109,7 +115,7 @@ function Gallery() {
     setSearch(value.trim())
 
 
-    if ( value === "") {
+    if (value === "") {
       setNewImages(images);
     } else {
       const searchedData = newImages.filter(item => (item.description.includes(capitalize(search) || search)))
@@ -119,7 +125,7 @@ function Gallery() {
 
     console.log(newImages)
   }
-
+  if(isLogin){setShowAuth(false)}
   return (
     <div className="main">
       <div className='subheader-cont'>
@@ -140,53 +146,57 @@ function Gallery() {
           </p>
         </div>
       </div>
-      {
-        isLogin ? (
-<DragDropContext onDragEnd={handleSort}>
-        <Droppable droppableId='images'>
-          {(provided) => (
-            <div className='image-grid' {...provided.droppableProps} ref={provided.innerRef}>
-                {provided.placeholder}
-              {newImages ? (newImages.map((item, index) => (
-                <Draggable key={item.id} draggableId={item.name} index={index}>
-                  {(provided) => (
-                    <div className="cardcontent" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} >
-                      <img
-                        alt={item.name}
-                        src={"." + item.path}
-                        className='image'
-                      />
-                      <p className="absolute bottom-0 bg-black w-full p-1 text-white text-sm text-center">
-                        {item.description}
-                      </p>
+       {isLogin ? (
+          <DragDropContext onDragEnd={handleSort}>
+            <Droppable droppableId='images'>
+              {(provided) => (
+                <div className='image-grid' {...provided.droppableProps} ref={provided.innerRef}>
+                  {provided.placeholder}
+                  {newImages ? (newImages.map((item, index) => (
+                    <Draggable key={item.id} draggableId={item.name} index={index}>
+                      {(provided) => (
+                        <div className="cardcontent" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} >
+                          <img
+                            alt={item.name}
+                            src={"." + item.path}
+                            className='image'
+                          />
+                          <p className="absolute bottom-0 bg-black w-full p-1 text-white text-sm text-center">
+                            {item.description}
+                          </p>
 
-                    </div>
-                  )}
-                </Draggable>
-              ))) : <ImageSkeleton cards={images.length} /> }
-            
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-        ) : (
-          newImages ? (newImages.map((item, index) => (
-                    <div className="cardcontent"  >
-                      <img
-                        alt={item.name}
-                        src={"." + item.path}
-                        className='image'
-                      />
-                      <p className="absolute bottom-0 bg-black w-full p-1 text-white text-sm text-center">
-                        {item.description}
-                      </p>
+                        </div>
+                      )}
+                    </Draggable>
+                  ))) : <ImageSkeleton cards={images.length} />}
 
-                    </div>
-              ))) : <ImageSkeleton cards={images.length} />
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+        )
+         : (
+          <>
+            {newImages ? (newImages.map((item, index) => (
+              <div className="cardcontent"  >
+                <img
+                  alt={item.name}
+                  src={"." + item.path}
+                  className='image'
+                />
+                <p className="absolute bottom-0 bg-black w-full p-1 text-white text-sm text-center">
+                  {item.description}
+                </p>
+
+              </div>
+            ))) : <ImageSkeleton cards={images.length} />}
+          </>
+
         )
       }
-      
+
     </div>
+
   );
 }
 

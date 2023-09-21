@@ -15,6 +15,7 @@ const ContextProvider = ({children}) => {
    const [loading, setLoading] = useState(false); 
    const [showSignUp, setShowSignUp] = useState(false); 
     const [error, setError] = useState('');
+    const [showAuth, setShowAuth] = useState(false);
     const [search, setSearch] = useState('')
 
     const value = {
@@ -27,7 +28,9 @@ const ContextProvider = ({children}) => {
         search, 
         setSearch,
         showSignUp, 
-        setShowSignUp
+        setShowSignUp,
+        showAuth, 
+        setShowAuth,
     }
 
     return <StateContext.Provider value={value}> {children} </StateContext.Provider>

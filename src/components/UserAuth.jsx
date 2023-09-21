@@ -6,8 +6,8 @@ import { Login, Navbar, SignUp } from '.';
 const UserAuth = () => {
     const { hasAccount, setHasAccount,showSignUp, setShowSignUp } = useStateContext()
     return (
-        <div>
-            <Navbar />
+        <div >
+         
             {
                 !showSignUp ? (
                     <>
@@ -34,3 +34,5 @@ const UserAuth = () => {
 }
 
 export default UserAuth;
+
+//className='auth-cont'

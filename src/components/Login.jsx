@@ -12,7 +12,7 @@ const Login = () => {
     }, [])
 
 
-    const { isLogin, setIsLogin } = useStateContext()
+    const { isLogin, setIsLogin, setShowAuth } = useStateContext()
     const { login, currentUser, error, setError } = UseAuthContext();
     const [loading, setLoading] = useState(false);
     const [isError, setIsError] = useState(false);
@@ -23,6 +23,7 @@ const Login = () => {
             // Set error to empty when creating a new account
             setError('');
             setLoading(true)
+          
            
             return await login(userRef.current.value, passwordRef.current.value)
             
@@ -37,6 +38,8 @@ const Login = () => {
     }
     // after waiting for login
     setLoading(false);
+
+ 
 }
 
 
