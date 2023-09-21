@@ -125,7 +125,7 @@ function Gallery() {
 
     console.log(newImages)
   }
-  if(isLogin){setShowAuth(false)}
+  if (isLogin) { setShowAuth(false) }
   return (
     <div className="main">
       <div className='subheader-cont'>
@@ -146,37 +146,41 @@ function Gallery() {
           </p>
         </div>
       </div>
-       {isLogin ? (
-          <DragDropContext onDragEnd={handleSort}>
-            <Droppable droppableId='images'>
-              {(provided) => (
-                <div className='image-grid' {...provided.droppableProps} ref={provided.innerRef}>
-                  {provided.placeholder}
-                  {newImages ? (newImages.map((item, index) => (
-                    <Draggable key={item.id} draggableId={item.name} index={index}>
-                      {(provided) => (
-                        <div className="cardcontent" {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} >
-                          <img
-                            alt={item.name}
-                            src={"." + item.path}
-                            className='image'
-                          />
-                          <p className="absolute bottom-0 bg-black w-full p-1 text-white text-sm text-center">
-                            {item.description}
-                          </p>
 
-                        </div>
-                      )}
-                    </Draggable>
-                  ))) : <ImageSkeleton cards={images.length} />}
+      {isLogin ? (
+        <DragDropContext onDragEnd={handleSort}>
+          <Droppable droppableId='images'
+            type="images"
+            direction="horizontal"
+            isCombineEnabled={true}          >
+            {(provided, snapshot) => (
+              <div className='image-grid' {...provided.droppableProps} ref={provided.innerRef} >
+                {newImages ? (newImages.map((item, index) => (
+                  <Draggable key={item.id} draggableId={item.name} index={index}>
+                    {(provided, snapshot) => (
+                      <div className="cardcontent"  {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} >
+                        <img
+                          alt={item.name}
+                          src={"." + item.path}
+                          className='image'
+                        />
+                        <p className="absolute bottom-0 bg-black w-full p-1 text-white text-sm text-center">
+                          {item.description}
+                        </p>
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Draggable>
+                ))) : <ImageSkeleton cards={images.length} />}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+      )
+        : (
+          <div className='image-grid'>
 
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
-        )
-         : (
-          <>
             {newImages ? (newImages.map((item, index) => (
               <div className="cardcontent"  >
                 <img
@@ -190,7 +194,8 @@ function Gallery() {
 
               </div>
             ))) : <ImageSkeleton cards={images.length} />}
-          </>
+          </div>
+
 
         )
       }

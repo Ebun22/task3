@@ -1,6 +1,5 @@
 'use client'
-import Skeleton from "react-loading-skeleton";
-
+import Skeleton from "react-skeleton";
 
 function ImageSkeleton({ cards }) {
     return  Array(cards)
