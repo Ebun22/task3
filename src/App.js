@@ -1,23 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
+import { AiOutlineSearch } from 'react-icons/ai';
+import React, { useState, useRef, useEffect } from 'react';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { Navbar, UserAuth } from './components';
+import Gallery from './components/Gallery';
+import { UseAuthContext } from './Context/AuthContext';
+import { useStateContext } from './Context/context';
 
 function App() {
+
+  const { isLogin } = UseAuthContext();
+  const { hasAccount } = useStateContext()
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+   
+        <>
+          <Navbar />
+          <Gallery />
+        </>
+
     </div>
   );
 }

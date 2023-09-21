@@ -1,38 +1,197 @@
+html, body{
+  top: 0;
+  margin: 0;
+  max-width: 1440px;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
 .App {
   text-align: center;
+  overflow-x: hidden;
+  width: 100vw;
+  padding: 15px 2% ;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.logo{
+  width: 30px;
+  height: 35px;
+  border-radius: 50%;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.navCont{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
+.inner-nav-cont{
+  display: flex;
+  flex-direction: row;
+}
+.hidden{
+  display: none;
+  opacity: 0;
+}
+.error-message{
+  padding: 5px;
+  border-left: red 2px solid;
+  color: black;
+  background-color: pink;
+  display: block;
+  opacity: 1;
+}
+.login-cont{
+  width: 100%;
+  margin: 0px auto;
+}
+.gall-name{
+  height: 25px;
+  margin-top: 0;
+  padding-left:10px;
+}
+.image-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Creates 4 equal-width columns */
+  gap: 2%;
+  margin: 1% 2%;
+}
+.image{
+  width: 256px;
+  height: 256px;
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+}
+.details{
+  margin-top: -2px;
+  padding-left: 4px;
+  margin-right: 35px;
+}
+.detail-cont{
+  display: flex;
+  flex-direction: row;
+ 
+}
+.logout-text{
+  color: red;
+  margin-top: 0px;;
+}
+.search-cont{
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  height: 100%;
+  float: right;
+  justify-content: end;
+  margin-top: 5%;
+  margin-right: 10px;
+}
+.searchBox{
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px;
+  margin-top: 2%;
+}
+.subheader-cont{
+  display:flex;
+  flex-direction: row;
+  margin: 1% 2%;
+  justify-content:space-between
+}
+.search-icon-cont{
+  width: 25px;
+  height: 25px;
+  position: absolute;
+}
+.signup-cont{
+  width: 100%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+
+}
+.signup-form{
+  width: 40%;
+ margin: auto;
+ padding: 10px 20px;
+ border-radius: 8px;
+ box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+.input-cont{
+  text-align: left;
+  display:flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.input-cont label, .input-cont input{
+  width: 100%;
+  margin-top: 5px;
+}
+.input-cont input{
+  padding: 5px 5px; 
+}
+.input-cont label{
+  font-weight: bold;
+ 
+}
+.btn{
+  width: 100%;
+  background-color: skyblue;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  margin: 30px 0px; 
+  font-weight: bold;
+}
+.switch{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.switch:hover{
+  text-decoration: underline;
+}
+.main{
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.card-content{
+  width: 256px;
+  height: 256px;
 }
 
-.App-link {
-  color: #61dafb;
+
+@media (max-width: 768px) {
+  html, body {
+    font-size: 14px; 
+  }
+
+  .App {
+    padding: 15px; 
+  }
+  .image-grid{
+    display: flex;
+    flex-direction: column;
+    gap: 2%;
+    margin: 1% 2%;
+  }
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Add media query for even smaller screens */
+@media (max-width: 480px) {
+  html, body {
+    font-size: 12px; 
   }
-  to {
-    transform: rotate(360deg);
+
+  .App {
+    padding: 10px; 
   }
+
+  .image-grid{
+    display: flex;
+    flex-direction: column;
+    gap: 2%;
+    margin: 1% 2%;
+  }
+
 }
