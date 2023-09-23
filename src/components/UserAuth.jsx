@@ -3,8 +3,11 @@ import React from 'react';
 import { useStateContext } from '../Context/context';
 import { Login, Navbar, SignUp } from '.';
 
+
 const UserAuth = () => {
     const { hasAccount, setHasAccount,showSignUp, setShowSignUp } = useStateContext()
+
+  
     return (
         <div >
          

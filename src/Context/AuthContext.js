@@ -1,6 +1,7 @@
 import React, { useContext, createContext, useState, useEffect } from 'react';
 import { auth } from '../firebase';
 
+
 const AuthContext = createContext(null);
 
 export const UseAuthContext = () => {
@@ -16,6 +17,7 @@ const AuthContextProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [isLogin, setIsLogin] = useState(false);
     const [error, setError] = useState('');
+ 
 
     //function for signup with firebase
     function signup(email, password) {
@@ -27,15 +29,12 @@ const AuthContextProvider = ({ children }) => {
         try {
             setIsLogin(true)
             const response = await auth.signInWithEmailAndPassword(email, password)
-                .then(() => {
-                    setIsLogin(true)
-                    return true
-                })
+            setIsLogin(true)
             console.log(isLogin)   
+            return response
         } catch (err) {
             setError("Account doesn't exist");
             console.log(err);
-
             if (error.code === "auth/invalid-email" || error.code === "auth/user-not-found") {
                 setError("Invalid email address or account doesn't exist.");
               } else if (error.code === "auth/wrong-password") {

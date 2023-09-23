@@ -1,7 +1,7 @@
 'use client'
 import { UseAuthContext } from '../Context/AuthContext';
 import { useStateContext } from '../Context/context';
-
+import { Link } from 'react-router-dom';
 import React, { useRef, useEffect, useState } from 'react';
 
 const SignUp = () => {
@@ -15,9 +15,9 @@ const SignUp = () => {
         userRef.current.focus();
     }, [])
 
-    const { hasAccount, setHasAccount} = useStateContext()
+    const { hasAccount, setHasAccount } = useStateContext()
     const { signup, currentUser } = UseAuthContext();
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
     const handleSubmit = async (e) => {
@@ -69,17 +69,21 @@ const SignUp = () => {
                         <label className="font-bold">Confirm Password:</label>
                         <input ref={pwdConfirmRef} type='password' className='p-1 border-2 border-black rounded-sm' />
                     </div>
-
-                   
-                        <button
-                            disabled={loading}
-                            onClick={() => setHasAccount(true)}
-                            className='btn'
-                        >
-                            SignUp
-                        </button>
-                
+                    <button
+                        disabled={loading}
+                        onClick={() => setHasAccount(true)}
+                        className='btn'
+                    >
+                        SignUp
+                    </button>
                 </form>
+                <div className="flex flex-row py-6 w-full justify-center text-center">
+                    <p>Already have an account?
+                        <Link to="/login" >
+                            <button className="switch">Login</button>
+                        </Link>
+                    </p>
+                </div>
             </div>
         </div>
     )

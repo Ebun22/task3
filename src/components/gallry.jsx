@@ -1,3 +1,69 @@
+{skeletonLoading
+    ? Array.from({ length: 6 }).map((_, idx) => (
+        <div className="flex skeleton" key={idx}>
+          <Skeleton height={350} width={300} />
+          <Skeleton height={10} width={200} />
+        </div>
+      ))
+    : showSearchResults
+    ? searchImage.map((index, idx) => (
+        <Draggable
+          draggableId={index.id}
+          key={index.id}
+          index={idx}
+        >
+          {(provided) => (
+            <div
+              className="flex"
+              {...provided.dragHandleProps}
+              {...provided.draggableProps}
+              ref={provided.innerRef}
+            >
+              <div className="dragIcon">
+                <BiGridVertical color="#fff" />
+              </div>
+              <img
+                src={index.urls.regular}
+                alt={index.alt_description}
+              />
+              <div className="alt_description">
+                {index.alt_description}
+              </div>
+            </div>
+          )}
+        </Draggable>
+      ))
+    : searchImage.map((index, idx) => (
+        <Draggable
+          draggableId={index.id}
+          key={index.id}
+          index={idx}
+        >
+          {(provided) => (
+            <div
+              className="flex"
+              {...provided.dragHandleProps}
+              {...provided.draggableProps}
+              ref={provided.innerRef}
+            >
+              <div className="dragIcon">
+                <BiGridVertical color="#fff" />
+              </div>
+              <img
+                src={index.urls.regular}
+                alt={index.alt_description}
+              />
+              <div className="alt_description">
+                {index.alt_description}
+              </div>
+            </div>
+          )}
+        </Draggable>
+      ))}
+  {provided.placeholder}
+</div>
+
+
 import { AiOutlineSearch } from 'react-icons/ai';
 import React, { useState, useRef, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
